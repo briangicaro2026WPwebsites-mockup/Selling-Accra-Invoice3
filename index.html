@@ -3,48 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Invoice #INV2026SELACRA-001 — PAID</title>
+    <title>Invoice #INV2026SELACRA-003 — Unpaid</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        /* ============================================================
+           Design Tokens
+           ============================================================ */
         :root {
-            --primary: #4f46e5;
-            --primary-light: #e0e7ff;
-            --success: #059669;
-            --success-bg: #d1fae5;
-            --warning: #d97706;
-            --warning-bg: #fef3c7;
-            --text-main: #111827;
-            --text-muted: #6b7280;
-            --border: #e5e7eb;
-            --bg-light: #f9fafb;
+            --brand: #4f46e5;
+            --brand-light: #eef2ff;
+            --brand-dark: #3730a3;
+
+            /* Wise brand */
             --wise-green: #9fe870;
-            --wise-dark: #163300;
+            --wise-green-hover: #8fdb5c;
+            --wise-forest: #163300;
+
+            --danger: #dc2626;
+            --danger-light: #fef2f2;
+            --danger-border: #fecaca;
+            --danger-strong: #991b1b;
+
+            --warning: #d97706;
+            --warning-light: #fffbeb;
+            --warning-border: #fde68a;
+
+            --success: #059669;
+            --success-light: #ecfdf5;
+
+            --ink: #0f172a;
+            --ink-2: #1e293b;
+            --body: #334155;
+            --muted: #64748b;
+            --subtle: #94a3b8;
+
+            --border: #e2e8f0;
+            --border-2: #cbd5e1;
+
+            --surface: #ffffff;
+            --surface-2: #f8fafc;
+            --bg: #f1f5f9;
+
+            --r-sm: 6px;
+            --r-md: 10px;
+            --r-lg: 14px;
+            --r-xl: 20px;
+
+            --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06);
+            --shadow-md: 0 4px 12px -2px rgba(15, 23, 42, 0.08);
+            --shadow-lg: 0 12px 32px -8px rgba(15, 23, 42, 0.12);
+            --shadow-xl: 0 24px 48px -12px rgba(15, 23, 42, 0.16);
         }
 
-        /* Keyframe Animations */
-        @keyframes slideUpFade {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes gradientMove {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        @keyframes pulsePaid {
-            0% { box-shadow: 0 0 0 0 rgba(5, 150, 105, 0.4); }
-            70% { box-shadow: 0 0 0 8px rgba(5, 150, 105, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(5, 150, 105, 0); }
-        }
+        /* ============================================================
+           Reset & Base
+           ============================================================ */
+        *, *::before, *::after { box-sizing: border-box; }
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            color: var(--text-main);
-            background-color: #f3f4f6;
+            color: var(--ink);
+            background: var(--bg);
             margin: 0;
             padding: 40px 20px;
             line-height: 1.5;
@@ -54,205 +75,415 @@
             print-color-adjust: exact;
         }
 
+        ::selection { background: rgba(79, 70, 229, 0.18); }
+
+        a:focus-visible, button:focus-visible {
+            outline: 2px solid var(--brand);
+            outline-offset: 2px;
+            border-radius: var(--r-sm);
+        }
+
+        /* ============================================================
+           Keyframes
+           ============================================================ */
+        @keyframes slideUpFade {
+            from { opacity: 0; transform: translateY(16px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes gradientMove {
+            0%   { background-position: 0% 50%; }
+            50%  { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes accentSweep {
+            0% { transform: translateX(-120%); }
+            55%, 100% { transform: translateX(220%); }
+        }
+
+        @keyframes watermarkFloat {
+            0%, 100% { transform: translate(-50%, -50%) rotate(-30deg) scale(1); }
+            50%      { transform: translate(-50%, -48.5%) rotate(-30deg) scale(1.015); }
+        }
+
+        @keyframes lineGrow {
+            from { transform: scaleX(0); }
+            to   { transform: scaleX(1); }
+        }
+
+        @keyframes balanceGlow {
+            0%, 100% { text-shadow: 0 2px 4px rgba(220, 38, 38, 0.2); }
+            50%      { text-shadow: 0 2px 16px rgba(220, 38, 38, 0.5); }
+        }
+
+        @keyframes dotPulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.5); }
+            70%      { box-shadow: 0 0 0 6px rgba(220, 38, 38, 0); }
+        }
+
+        @keyframes shineSweep {
+            0% { transform: translateX(-160%) skewX(-20deg); }
+            60%, 100% { transform: translateX(320%) skewX(-20deg); }
+        }
+
+        @keyframes itemReveal {
+            from { opacity: 0; transform: translateX(-8px); }
+            to   { opacity: 1; transform: translateX(0); }
+        }
+
+        /* ============================================================
+           Layout
+           ============================================================ */
         .invoice-container {
             position: relative;
-            max-width: 850px;
+            max-width: 880px;
             margin: 0 auto;
-            background: #ffffff;
-            border-radius: 12px;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025);
+            background: var(--surface);
+            border-radius: var(--r-xl);
+            box-shadow: var(--shadow-xl);
             overflow: hidden;
             opacity: 0;
             animation: slideUpFade 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
-        /* Animated Top Accent Bar */
         .accent-bar {
-            height: 6px;
-            background: linear-gradient(90deg, #4f46e5 0%, #7c3aed 25%, #ec4899 50%, #7c3aed 75%, #4f46e5 100%);
+            position: relative;
+            height: 5px;
+            overflow: hidden;
+            background: linear-gradient(90deg, #dc2626 0%, #f59e0b 25%, #dc2626 50%, #f59e0b 75%, #dc2626 100%);
             background-size: 200% 200%;
             animation: gradientMove 6s linear infinite;
         }
+        .accent-bar::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            width: 45%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.7), transparent);
+            animation: accentSweep 4.5s ease-in-out infinite;
+        }
 
-        /* PAID Watermark */
-        .paid-watermark {
+        .unpaid-watermark {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%) rotate(-30deg);
-            font-size: 130px;
+            font-size: 96px;
             font-weight: 800;
-            letter-spacing: 14px;
-            color: rgba(5, 150, 105, 0.07);
-            border: 10px solid rgba(5, 150, 105, 0.07);
-            padding: 6px 40px 6px 54px;
-            border-radius: 20px;
+            letter-spacing: 12px;
+            color: rgba(220, 38, 38, 0.045);
+            border: 8px solid rgba(220, 38, 38, 0.045);
+            padding: 6px 32px 6px 42px;
+            border-radius: 18px;
             white-space: nowrap;
             pointer-events: none;
             user-select: none;
             z-index: 0;
+            animation: watermarkFloat 9s ease-in-out infinite;
         }
 
         .invoice-body {
             position: relative;
             z-index: 1;
-            padding: 40px;
+            padding: 44px 48px 40px;
         }
 
-        /* Header */
+        /* ============================================================
+           Header
+           ============================================================ */
         .header {
+            position: relative;
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
+            gap: 24px;
+            padding-bottom: 28px;
+            margin-bottom: 28px;
             border-bottom: 1px solid var(--border);
-            padding-bottom: 30px;
-            margin-bottom: 30px;
             opacity: 0;
             animation: slideUpFade 0.6s 0.1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
-
-        .header-left h1 {
-            margin: 0 0 8px 0;
-            font-size: 32px;
-            font-weight: 700;
-            color: var(--text-main);
-            letter-spacing: -0.5px;
+        .header::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -1px;
+            height: 2px;
+            width: 100%;
+            background: linear-gradient(90deg, var(--brand), var(--warning), var(--brand));
+            transform: scaleX(0);
+            transform-origin: left;
+            animation: lineGrow 1s 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            border-radius: 2px;
         }
 
-        .header-left p {
-            margin: 4px 0;
-            color: var(--text-muted);
-            font-size: 14px;
-        }
-
-        .header-right {
-            text-align: right;
-        }
-
-        .header-right h2 {
-            margin: 0 0 12px 0;
-            font-size: 18px;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 1px;
+        .invoice-eyebrow {
+            font-size: 11px;
             font-weight: 600;
-        }
-
-        .header-right p {
-            margin: 6px 0;
-            font-size: 14px;
-            color: var(--text-main);
-        }
-
-        /* PAID Badge (replaces due-date badge) */
-        .paid-badge {
-            display: inline-block;
-            background-color: var(--success);
-            color: #ffffff;
-            padding: 6px 14px;
-            border-radius: 6px;
-            font-weight: 700;
-            font-size: 13px;
-            letter-spacing: 0.6px;
             text-transform: uppercase;
-            margin-top: 4px;
-            border: 1px solid var(--success);
-            animation: pulsePaid 2.4s infinite;
+            letter-spacing: 0.12em;
+            color: var(--brand);
+            margin-bottom: 6px;
         }
 
-        /* PAID Banner */
-        .paid-banner {
-            display: flex;
+        .invoice-number {
+            margin: 0 0 10px;
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--ink);
+            letter-spacing: -0.5px;
+            line-height: 1.1;
+        }
+
+        .invoice-subtitle {
+            margin: 0 0 4px;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--ink-2);
+        }
+
+        .invoice-domain {
+            margin: 0;
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        .header-status {
+            flex: 0 0 auto;
+            padding-top: 4px;
+        }
+
+        .status-pill {
+            display: inline-flex;
             align-items: center;
-            gap: 14px;
-            background: var(--success-bg);
-            border: 1px solid var(--success);
-            border-radius: 8px;
-            padding: 16px 20px;
-            margin-bottom: 30px;
+            gap: 8px;
+            padding: 7px 14px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            border: 1px solid;
+        }
+
+        .status-unpaid {
+            background: var(--danger-light);
+            color: var(--danger-strong);
+            border-color: var(--danger-border);
+        }
+
+        .status-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--danger);
+            animation: dotPulse 2s ease-in-out infinite;
+        }
+
+        /* ============================================================
+           Meta Row
+           ============================================================ */
+        .meta-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            border: 1px solid var(--border);
+            border-radius: var(--r-md);
+            overflow: hidden;
+            margin-bottom: 28px;
+            background: var(--surface);
             opacity: 0;
             animation: slideUpFade 0.6s 0.15s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
-        .paid-banner .icon {
-            flex: 0 0 34px;
-            width: 34px;
-            height: 34px;
-            border-radius: 50%;
-            background: var(--success);
-            color: #ffffff;
+        .meta-item {
+            padding: 14px 20px;
+            border-right: 1px solid var(--border);
+        }
+        .meta-item:last-child { border-right: none; }
+
+        .meta-label {
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--subtle);
+            margin-bottom: 4px;
+        }
+
+        .meta-value {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--ink);
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* ============================================================
+           Amount Card
+           ============================================================ */
+        .amount-card {
+            position: relative;
             display: flex;
             align-items: center;
-            justify-content: center;
-            font-size: 18px;
-            font-weight: 700;
-        }
-
-        .paid-banner .text strong {
-            display: block;
-            font-size: 15px;
-            color: var(--success);
-            letter-spacing: 0.3px;
-        }
-
-        .paid-banner .text span {
-            font-size: 13px;
-            color: var(--text-muted);
-        }
-
-        /* Billing Info */
-        .billing-info {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 40px;
-            gap: 40px;
+            gap: 32px;
+            padding: 24px 28px;
+            margin-bottom: 32px;
+            background: linear-gradient(135deg, #fef2f2 0%, #fff7ed 100%);
+            border: 1px solid var(--danger-border);
+            border-radius: var(--r-lg);
+            overflow: hidden;
             opacity: 0;
             animation: slideUpFade 0.6s 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
-
-        .billing-info div {
-            flex: 1;
-            padding: 15px;
-            background: var(--bg-light);
-            border-radius: 8px;
-            border: 1px solid var(--border);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        .amount-card::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--danger);
         }
 
-        .billing-info div:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.05);
-            background: #ffffff;
+        .amount-main {
+            flex: 0 0 auto;
+            padding-right: 32px;
+            border-right: 1px solid var(--danger-border);
         }
 
-        .billing-info h3 {
-            font-size: 12px;
+        .amount-label {
+            font-size: 10px;
+            font-weight: 600;
             text-transform: uppercase;
-            color: var(--text-muted);
-            margin: 0 0 12px 0;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.1em;
+            color: var(--danger-strong);
+            margin-bottom: 6px;
+        }
+
+        .amount-figure {
+            font-size: 38px;
+            font-weight: 700;
+            color: var(--danger);
+            letter-spacing: -1.5px;
+            line-height: 1.05;
+            margin-bottom: 4px;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .amount-due {
+            font-size: 12px;
+            color: var(--muted);
+        }
+        .amount-due strong {
+            color: var(--danger-strong);
             font-weight: 600;
         }
 
-        .billing-info p {
-            margin: 4px 0;
-            font-size: 14px;
-            color: var(--text-main);
+        .amount-note {
+            flex: 1;
         }
 
-        .billing-info p.name {
+        .amount-note-title {
+            font-size: 13px;
             font-weight: 600;
-            font-size: 16px;
-            color: var(--primary);
+            color: var(--danger-strong);
+            margin-bottom: 4px;
         }
 
-        /* Table */
+        .amount-note p {
+            margin: 0;
+            font-size: 13px;
+            color: var(--muted);
+            line-height: 1.55;
+        }
+
+        /* ============================================================
+           Billing Grid
+           ============================================================ */
+        .billing-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 36px;
+            opacity: 0;
+            animation: slideUpFade 0.6s 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .billing-card {
+            padding: 18px 20px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--r-md);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+        .billing-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--border-2);
+            box-shadow: var(--shadow-md);
+        }
+
+        .billing-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .billing-icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+            background: var(--brand-light);
+            color: var(--brand);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex: 0 0 28px;
+        }
+
+        .billing-label {
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--subtle);
+        }
+
+        .billing-name {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 2px;
+        }
+
+        .billing-role {
+            font-size: 12.5px;
+            color: var(--muted);
+            margin-bottom: 4px;
+        }
+
+        .billing-detail {
+            font-size: 12px;
+            color: var(--subtle);
+            line-height: 1.5;
+        }
+
+        .billing-detail a {
+            color: var(--brand);
+            text-decoration: none;
+        }
+        .billing-detail a:hover { text-decoration: underline; }
+
+        /* ============================================================
+           Table
+           ============================================================ */
         .table-wrapper {
             width: 100%;
             overflow-x: auto;
-            margin-bottom: 30px;
-            border-radius: 8px;
+            margin-bottom: 28px;
             border: 1px solid var(--border);
+            border-radius: var(--r-lg);
+            background: var(--surface);
             opacity: 0;
             animation: slideUpFade 0.6s 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
@@ -263,367 +494,633 @@
             min-width: 600px;
         }
 
-        th {
-            background-color: var(--bg-light);
-            color: var(--text-muted);
-            font-size: 12px;
+        thead th {
+            background: var(--surface-2);
+            color: var(--muted);
+            font-size: 11px;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.06em;
             text-align: left;
-            padding: 14px 16px;
+            padding: 13px 20px;
             border-bottom: 1px solid var(--border);
         }
 
-        td {
-            padding: 16px;
+        tbody td {
+            padding: 18px 20px;
             border-bottom: 1px solid var(--border);
-            font-size: 14px;
+            font-size: 13.5px;
             vertical-align: top;
-            transition: background-color 0.2s ease;
         }
+        tbody tr:last-child td { border-bottom: none; }
 
         tbody tr {
-            transition: all 0.25s ease;
-            background-color: #ffffff;
-            position: relative;
+            transition: background-color 0.2s ease;
+            background: var(--surface);
         }
+        tbody tr:hover { background: var(--surface-2); }
 
-        tbody tr:hover {
-            background-color: var(--bg-light);
-            transform: scale(1.002);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
-            z-index: 1;
-        }
+        .text-right { text-align: right; }
+        .tabular { font-variant-numeric: tabular-nums; }
 
+        /* ============================================================
+           Task Description
+           ============================================================ */
         .task-desc {
             font-weight: 500;
-            color: var(--text-main);
-            max-width: 320px;
+            color: var(--ink);
+            max-width: 440px;
+            font-size: 13.5px;
+            line-height: 1.5;
+        }
+
+        .task-title {
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 2px;
         }
 
         .task-url {
             display: inline-block;
-            font-size: 12px;
-            color: var(--primary);
-            margin-top: 6px;
+            margin: 6px 0 10px;
+            padding: 3px 9px;
+            font-size: 11.5px;
+            font-weight: 500;
+            color: var(--brand);
+            background: rgba(79, 70, 229, 0.06);
+            border-radius: var(--r-sm);
             text-decoration: none;
             word-break: break-all;
-            transition: color 0.2s ease, text-decoration 0.2s ease;
-            background: rgba(79, 70, 229, 0.05);
-            padding: 2px 6px;
-            border-radius: 4px;
+            transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
         }
-
         .task-url:hover {
-            color: #4338ca;
-            text-decoration: underline;
-            background: rgba(79, 70, 229, 0.1);
+            background: rgba(79, 70, 229, 0.12);
+            color: var(--brand-dark);
+            box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.08);
         }
 
+        .task-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .task-desc > .task-list > li {
+            font-weight: 600;
+            color: var(--ink);
+            font-size: 12.5px;
+            margin: 16px 0 6px;
+            padding-bottom: 6px;
+            border-bottom: 1px dashed var(--border);
+            opacity: 0;
+            animation: itemReveal 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        .task-desc > .task-list > li:first-child { margin-top: 6px; }
+        .task-desc > .task-list > li:nth-child(1) { animation-delay: 0.40s; }
+        .task-desc > .task-list > li:nth-child(2) { animation-delay: 0.48s; }
+        .task-desc > .task-list > li:nth-child(3) { animation-delay: 0.56s; }
+        .task-desc > .task-list > li:nth-child(4) { animation-delay: 0.64s; }
+        .task-desc > .task-list > li:nth-child(5) { animation-delay: 0.72s; }
+
+        .task-desc > .task-list > li > .task-list {
+            margin: 6px 0 0;
+            padding: 0;
+        }
+
+        .task-desc > .task-list > li > .task-list > li {
+            position: relative;
+            padding-left: 16px;
+            font-weight: 400;
+            color: var(--body);
+            font-size: 12px;
+            line-height: 1.55;
+            margin: 4px 0;
+        }
+
+        .task-desc > .task-list > li > .task-list > li::before {
+            content: "";
+            position: absolute;
+            left: 2px;
+            top: 7px;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: var(--brand);
+            opacity: 0.5;
+        }
+
+        .sub-bullet {
+            display: block;
+            position: relative;
+            padding-left: 18px;
+            margin-top: 2px;
+            color: var(--muted);
+            font-size: 11.5px;
+        }
+        .sub-bullet::before {
+            content: "";
+            position: absolute;
+            left: 6px;
+            top: 6px;
+            width: 4px;
+            height: 4px;
+            border: 1px solid var(--subtle);
+            border-radius: 50%;
+        }
+
+        /* ============================================================
+           Status Badges
+           ============================================================ */
         .status-badge {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
             padding: 4px 10px;
-            border-radius: 9999px;
-            font-size: 11px;
+            border-radius: 999px;
+            font-size: 10.5px;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.06em;
             transition: transform 0.2s ease;
         }
-
-        .status-badge:hover {
-            transform: scale(1.05);
-        }
+        .status-badge:hover { transform: scale(1.05); }
 
         .status-completed {
-            background-color: var(--success-bg);
+            position: relative;
+            overflow: hidden;
+            background: var(--success-light);
             color: var(--success);
             border: 1px solid transparent;
         }
-
-        .status-pending {
-            background-color: #f3f4f6;
-            color: var(--text-muted);
-            border: 1px solid var(--border);
+        .status-completed::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 55%;
+            height: 100%;
+            background: linear-gradient(120deg, transparent, rgba(255,255,255,0.85), transparent);
+            animation: shineSweep 4s ease-in-out infinite;
+            animation-delay: 1.8s;
+            pointer-events: none;
         }
 
-        .text-right {
-            text-align: right;
-        }
-
-        /* Summary Card */
+        /* ============================================================
+           Summary Card
+           ============================================================ */
         .summary-wrapper {
             display: flex;
             justify-content: flex-end;
-            margin-top: 20px;
+            margin-top: 8px;
             opacity: 0;
             animation: slideUpFade 0.6s 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
         .summary-card {
-            background-color: var(--bg-light);
+            width: 360px;
+            max-width: 100%;
+            background: var(--surface);
             border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 24px;
-            width: 320px;
-            transition: box-shadow 0.3s ease;
+            border-radius: var(--r-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+        }
+        .summary-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
         }
 
-        .summary-card:hover {
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        .summary-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 20px;
+            border-bottom: 1px solid var(--border);
+            background: var(--surface-2);
+        }
+
+        .summary-title {
+            margin: 0;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--muted);
+        }
+
+        .summary-status {
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--danger-strong);
+            background: var(--danger-light);
+            padding: 3px 9px;
+            border-radius: 999px;
+            border: 1px solid var(--danger-border);
+        }
+
+        .summary-rows {
+            padding: 14px 20px;
         }
 
         .summary-row {
             display: flex;
             justify-content: space-between;
-            padding: 8px 0;
-            font-size: 14px;
-            color: var(--text-muted);
+            align-items: baseline;
+            padding: 6px 0;
+            font-size: 13px;
+            color: var(--muted);
+            opacity: 0;
+            animation: slideUpFade 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
+        .summary-row:nth-child(1) { animation-delay: 0.46s; }
+        .summary-row:nth-child(2) { animation-delay: 0.51s; }
+        .summary-row:nth-child(3) { animation-delay: 0.56s; }
+        .summary-row:nth-child(4) { animation-delay: 0.61s; }
+        .summary-row:nth-child(5) { animation-delay: 0.66s; }
+        .summary-row:nth-child(6) { animation-delay: 0.71s; }
 
         .summary-row span:last-child {
             font-weight: 500;
-            color: var(--text-main);
+            color: var(--ink);
+            font-variant-numeric: tabular-nums;
         }
 
-        .summary-row.total {
-            border-top: 2px solid var(--border);
-            margin-top: 12px;
-            padding-top: 16px;
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--text-main);
+        .summary-divider {
+            height: 1px;
+            background: var(--border);
+            margin: 10px 0;
         }
 
-        .summary-row.total span:last-child {
-            color: var(--text-main);
-            font-size: 20px;
-        }
-
-        .summary-row.paid-row span:last-child {
-            color: var(--success);
-            font-weight: 700;
-        }
-
-        .summary-row.balance {
-            border-top: 2px solid var(--border);
-            margin-top: 12px;
-            padding-top: 16px;
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--text-main);
-        }
-
-        .summary-row.balance span:last-child {
-            color: var(--success);
-            font-size: 22px;
-            text-shadow: 0 2px 4px rgba(5, 150, 105, 0.2);
-        }
-
-        /* Payment Section (Paid) */
-        .payment-section {
-            margin-top: 30px;
-            padding: 24px;
-            background-color: var(--success-bg);
-            border: 1px solid var(--success);
-            border-radius: 8px;
+        .summary-balance {
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            gap: 20px;
+            align-items: center;
+            padding: 16px 20px;
+            background: var(--danger-light);
+            border-top: 1px solid var(--danger-border);
+        }
+
+        .summary-balance-label {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--danger-strong);
+        }
+
+        .summary-balance-value {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--danger);
+            font-variant-numeric: tabular-nums;
+            letter-spacing: -0.5px;
+            animation: balanceGlow 3s ease-in-out infinite;
+        }
+
+        /* ============================================================
+           Payment Instructions Card
+           ============================================================ */
+        .payment-instructions {
+            margin-top: 32px;
+            background: linear-gradient(135deg, var(--surface) 0%, var(--surface-2) 100%);
+            border: 1px solid var(--warning-border);
+            border-radius: var(--r-lg);
+            overflow: hidden;
             opacity: 0;
             animation: slideUpFade 0.6s 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
-        .payment-info h4 {
-            margin: 0 0 6px 0;
-            font-size: 16px;
-            color: var(--success);
+        .payment-instructions-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 24px;
+            background: var(--warning-light);
+            border-bottom: 1px solid var(--warning-border);
         }
 
-        .payment-info p {
+        .payment-instructions-header svg {
+            color: var(--warning);
+        }
+
+        .payment-instructions-header h3 {
             margin: 0;
-            font-size: 13px;
-            color: var(--text-muted);
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--ink);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
 
-        .payment-info p.payment-ref {
-            margin-top: 6px;
-            font-size: 12px;
-            color: var(--text-muted);
-            font-variant-numeric: tabular-nums;
+        .payment-instructions-body {
+            padding: 24px;
         }
 
-        .paid-chip {
-            display: inline-block;
-            background-color: var(--success);
-            color: #ffffff;
-            padding: 12px 22px;
-            border-radius: 8px;
-            font-weight: 700;
-            font-size: 15px;
-            letter-spacing: 0.4px;
-            white-space: nowrap;
-            box-shadow: 0 4px 6px -1px rgba(5, 150, 105, 0.35);
-        }
-
-        /* Notes & Footer */
-        .notes {
-            margin-top: 30px;
-            padding: 20px;
-            background-color: var(--primary-light);
-            border-left: 4px solid var(--primary);
-            border-radius: 4px;
-            font-size: 13px;
-            color: var(--text-main);
+        .payment-instructions-body p {
+            margin: 0 0 16px;
+            font-size: 13.5px;
+            color: var(--body);
             line-height: 1.6;
+        }
+
+        .payment-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .payment-item {
+            background: var(--surface);
+            padding: 14px 16px;
+            border-radius: var(--r-md);
+            border: 1px solid var(--border);
+        }
+
+        .payment-item-label {
+            display: block;
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--subtle);
+            margin-bottom: 4px;
+        }
+
+        .payment-item-value {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--ink);
+            word-break: break-all;
+        }
+
+        .payment-item-value a {
+            color: var(--brand);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .payment-item-value a:hover { text-decoration: underline; }
+
+        /* ---- Wise-branded pay button ---- */
+        .pay-now-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            padding: 14px;
+            background: var(--wise-green);
+            color: var(--wise-forest);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 14px;
+            border-radius: var(--r-md);
+            transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .pay-now-btn svg { color: currentColor; }
+
+        .pay-now-btn:hover {
+            background: var(--wise-green-hover);
+            color: var(--wise-forest);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(22, 51, 0, 0.28);
+        }
+
+        .pay-now-btn:active {
+            transform: translateY(-1px);
+            box-shadow: 0 3px 8px rgba(22, 51, 0, 0.22);
+        }
+
+        .pay-now-btn:focus-visible {
+            outline: 2px solid var(--wise-forest);
+            outline-offset: 2px;
+        }
+
+        /* ============================================================
+           Footer
+           ============================================================ */
+        .footer {
+            margin-top: 40px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            font-size: 12px;
+            color: var(--muted);
             opacity: 0;
             animation: slideUpFade 0.6s 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
-        .notes strong {
-            display: block;
-            margin-bottom: 4px;
-            color: var(--primary);
-        }
+        .footer p { margin: 0 0 4px; }
+        .footer p:last-child { margin-bottom: 0; }
+        .footer strong { color: var(--ink-2); font-weight: 600; }
 
-        /* Print Button */
+        /* ============================================================
+           Print Button
+           ============================================================ */
         .print-btn {
             display: block;
             width: 220px;
-            margin: 30px auto 0;
+            margin: 32px auto 0;
             padding: 14px;
-            background-color: var(--primary);
-            color: white;
+            background: var(--brand);
+            color: #fff;
             text-align: center;
             border: none;
-            border-radius: 8px;
-            font-size: 16px;
+            border-radius: var(--r-md);
+            font-family: inherit;
+            font-size: 15px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.2);
+            box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.25);
             opacity: 0;
             animation: slideUpFade 0.6s 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
-
         .print-btn:hover {
-            background-color: #4338ca;
+            background: var(--brand-dark);
             transform: translateY(-3px);
-            box-shadow: 0 8px 15px rgba(79, 70, 229, 0.4);
+            box-shadow: 0 10px 18px -4px rgba(79, 70, 229, 0.4);
         }
-
         .print-btn:active {
             transform: translateY(-1px);
-            box-shadow: 0 4px 8px rgba(79, 70, 229, 0.3);
+            box-shadow: 0 4px 8px -1px rgba(79, 70, 229, 0.35);
         }
 
-        /* Print Media Query */
+        /* ============================================================
+           Responsive
+           ============================================================ */
+        @media (max-width: 720px) {
+            body { padding: 20px 12px; }
+            .invoice-body { padding: 28px 22px 26px; }
+            .unpaid-watermark { font-size: 64px; letter-spacing: 8px; padding: 4px 20px 4px 28px; }
+
+            .header { flex-direction: column; gap: 16px; padding-bottom: 22px; margin-bottom: 22px; }
+            .header-status { padding-top: 0; }
+            .invoice-number { font-size: 22px; }
+
+            .meta-row { grid-template-columns: 1fr; }
+            .meta-item { border-right: none; border-bottom: 1px solid var(--border); }
+            .meta-item:last-child { border-bottom: none; }
+
+            .amount-card { flex-direction: column; align-items: stretch; gap: 16px; padding: 20px 22px; }
+            .amount-main { padding-right: 0; padding-bottom: 16px; border-right: none; border-bottom: 1px solid var(--danger-border); }
+            .amount-figure { font-size: 32px; }
+
+            .billing-grid { grid-template-columns: 1fr; }
+            .payment-grid { grid-template-columns: 1fr; }
+
+            thead { display: none; }
+            tbody tr { display: flex; flex-wrap: wrap; padding: 16px; border: 1px solid var(--border); border-radius: var(--r-md); margin-bottom: 12px; background: var(--surface); }
+            tbody tr:last-child { margin-bottom: 0; }
+            tbody td { display: block; flex: 1 1 50%; padding: 10px 0; border-bottom: none; font-size: 13px; }
+            tbody td::before {
+                content: attr(data-label);
+                display: block;
+                font-size: 10px;
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 0.08em;
+                color: var(--subtle);
+                margin-bottom: 4px;
+            }
+            tbody td.task-desc { flex: 0 0 100%; padding: 0 0 16px; margin-bottom: 12px; border-bottom: 1px solid var(--border); max-width: none; }
+            tbody td.task-desc::before { display: none; }
+            tbody td:last-child { padding-bottom: 0; }
+            .text-right { text-align: left; }
+
+            .summary-wrapper { justify-content: stretch; }
+            .summary-card { width: 100%; }
+
+            .footer { margin-top: 28px; }
+        }
+
+        @media (max-width: 480px) {
+            .invoice-body { padding: 22px 16px 20px; }
+            .amount-figure { font-size: 28px; }
+            .summary-balance-value { font-size: 20px; }
+        }
+
+        /* ============================================================
+           Reduced Motion & Print
+           ============================================================ */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation: none !important; transition: none !important; opacity: 1 !important; transform: none !important; }
+        }
+
         @media print {
-            body {
-                background-color: white;
-                padding: 0;
+            body { background: #fff; padding: 0; }
+            *, *::before, *::after {
+                animation: none !important; transition: none !important; opacity: 1 !important; transform: none !important;
+                box-shadow: none !important; text-shadow: none !important;
             }
-            * {
-                animation: none !important;
-                transition: none !important;
-                opacity: 1 !important;
-                transform: none !important;
-                box-shadow: none !important;
-            }
-            .invoice-container {
-                border-radius: 0;
-                max-width: 100%;
-            }
-            .accent-bar {
-                display: none;
-            }
-            .paid-watermark {
-                transform: translate(-50%, -50%) rotate(-30deg) !important;
-            }
-            .billing-info div {
-                border: none;
-                background: transparent;
-                padding: 0;
-            }
-            .table-wrapper {
-                border: none;
-            }
-            .print-btn {
-                display: none;
-            }
-            .status-completed {
-                border: 1px solid var(--success);
-            }
-            .status-pending {
-                border: 1px solid var(--text-muted);
-            }
-            .task-url {
-                color: var(--text-main);
-                background: transparent;
-                padding: 0;
-            }
-            .payment-section {
-                border: 1px solid var(--success);
-            }
-            .paid-badge,
-            .paid-chip,
-            .paid-banner .icon {
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
-            }
+            .invoice-container { border-radius: 0; max-width: 100%; box-shadow: none; }
+            .accent-bar, .accent-bar::after, .header::after, .status-dot, .status-completed::after { display: none; }
+            .unpaid-watermark { transform: translate(-50%, -50%) rotate(-30deg) !important; color: rgba(220, 38, 38, 0.06); border-color: rgba(220, 38, 38, 0.06); }
+            .billing-card:hover, .summary-card:hover, .payment-card:hover, tbody tr:hover { transform: none !important; box-shadow: none !important; }
+            .print-btn { display: none; }
+            .task-url { color: var(--ink); background: transparent; padding: 0; }
+            tbody tr { page-break-inside: avoid; }
+            .summary-wrapper { page-break-inside: avoid; }
+            .payment-instructions { page-break-inside: avoid; border: 1px solid #ccc; }
+            .pay-now-btn { background: #9fe870 !important; color: #163300 !important; border: 1px solid #163300; }
         }
     </style>
 </head>
 <body>
 
-    <div class="invoice-container">
-        <div class="accent-bar"></div>
-        <div class="paid-watermark" aria-hidden="true">PAID</div>
+    <main class="invoice-container" role="main" aria-label="Invoice INV2026SELACRA-003">
+        <div class="accent-bar" aria-hidden="true"></div>
+        <div class="unpaid-watermark" aria-hidden="true">UNPAID</div>
+
         <div class="invoice-body">
+
             <!-- Header -->
-            <div class="header">
-                <div class="header-left">
-                    <h1>INVOICE</h1>
-                    <p><strong>Project:</strong> Website Landing Page &amp; Social Media Updates</p>
-                    <p><strong>Domain:</strong> sellingaccra.com</p>
+            <header class="header">
+                <div class="header-brand">
+                    <div class="invoice-eyebrow">Invoice</div>
+                    <h1 class="invoice-number">#INV2026SELACRA-003</h1>
+                    <p class="invoice-subtitle">Real Estate Website Landing Page &amp; Social Media Updates</p>
+                    <p class="invoice-domain">https://sellingaccra.com/</p>
                 </div>
-                <div class="header-right">
-                    <h2>#INV2026SELACRA-001</h2>
-                    <p><strong>Issue Date:</strong> Nov 4, 2026</p>
-                    <p><strong>Billing Period:</strong> Oct 26 - Nov 1, 2026</p>
-                    <div class="paid-badge">✓ Paid — Nov 5, 2026</div>
+                <div class="header-status">
+                    <span class="status-pill status-unpaid">
+                        <span class="status-dot" aria-hidden="true"></span>
+                        Unpaid
+                    </span>
+                </div>
+            </header>
+
+            <!-- Meta Row -->
+            <div class="meta-row">
+                <div class="meta-item">
+                    <div class="meta-label">Issue Date</div>
+                    <div class="meta-value">Nov 7, 2026</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Due Date</div>
+                    <div class="meta-value">Nov 9, 2026</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Billing Period</div>
+                    <div class="meta-value">Nov 2 — Nov 7, 2026</div>
                 </div>
             </div>
 
-            <!-- Paid Banner -->
-            <div class="paid-banner">
-                <div class="icon">✓</div>
-                <div class="text">
-                    <strong>PAID IN FULL — $133.00</strong>
-                    <span>Payment received on Nov 5, 2026 via Wise. No balance remaining. Pending items will be billed next cycle.</span>
+            <!-- Amount Card -->
+            <section class="amount-card" aria-label="Amount due">
+                <div class="amount-main">
+                    <div class="amount-label">Amount Due</div>
+                    <div class="amount-figure" data-count="140" data-prefix="$" data-decimals="2">$140.00</div>
+                    <div class="amount-due">Due by <strong>Nov 9, 2026</strong></div>
                 </div>
-            </div>
+                <div class="amount-note">
+                    <div class="amount-note-title">Payment outstanding</div>
+                    <p>No payment has been received to date. Pending items will be billed next cycle.</p>
+                </div>
+            </section>
 
-            <!-- Billing Info -->
-            <div class="billing-info">
-                <div>
-                    <h3>Billed To</h3>
-                    <p class="name">Beatrix Ayache</p>
-                    <p>Realtor Agent</p>
-                    <p>Owner of Selling Accra - sellingaccra.com</p>
+            <!-- Billing Grid -->
+            <section class="billing-grid" aria-label="Billing information">
+                <div class="billing-card">
+                    <div class="billing-header">
+                        <div class="billing-icon" aria-hidden="true">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                                <circle cx="12" cy="7" r="4"/>
+                            </svg>
+                        </div>
+                        <span class="billing-label">Billed To</span>
+                    </div>
+                    <div class="billing-name">Beatrix Ayache</div>
+                    <div class="billing-role">Realtor Agent</div>
+                    <div class="billing-detail">Owner of Selling Accra — sellingaccra.com</div>
                 </div>
-                <div>
-                    <h3>Billed From</h3>
-                    <p class="name">Brian Gicaro</p>
-                    <p>Website Developer</p>
-                    <p>Virtual Assistant/Freelancer</p>
+                <div class="billing-card">
+                    <div class="billing-header">
+                        <div class="billing-icon" aria-hidden="true">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="7" width="20" height="14" rx="2"/>
+                                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+                            </svg>
+                        </div>
+                        <span class="billing-label">Billed From</span>
+                    </div>
+                    <div class="billing-name">Brian Dalisay Gicaro</div>
+                    <div class="billing-role">Website Developer</div>
+                    <div class="billing-detail">
+                        Virtual Assistant / Freelancer<br>
+                        WhatsApp: <a href="https://wa.me/639692133420" target="_blank" rel="noopener">+63 969 213 3420</a>
+                    </div>
                 </div>
-            </div>
+            </section>
 
             <!-- Line Items -->
-            <div class="table-wrapper">
+            <section class="table-wrapper" aria-label="Line items">
                 <table>
                     <thead>
                         <tr>
@@ -636,111 +1133,158 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td class="task-desc">1. Finalize Landing Pages template (Site 1 sellingaccra.com / Site 2 https://sellingaccra.com/landing-page-2-selling-accra/)</td>
-                            <td><span class="status-badge status-completed">Completed</span></td>
-                            <td class="text-right">13h</td>
-                            <td class="text-right">$7.00</td>
-                            <td class="text-right">$91.00</td>
-                        </tr>
-                        <tr>
-                            <td class="task-desc">2. Finalize watermark logo for photos - logo should be transparent https://i.postimg.cc/4xKfz8NF/1.jpg</td>
-                            <td><span class="status-badge status-completed">Completed</span></td>
-                            <td class="text-right">1h</td>
-                            <td class="text-right">$7.00</td>
-                            <td class="text-right">$7.00</td>
-                        </tr>
-                        <tr>
-                            <td class="task-desc">
-                                3. Update Enquiry form - New Form and Logo
-                                <a href="https://docs.google.com/forms/d/e/1FAIpQLSdaWE0f7DwZKoiGVRWT-OdP8rVvMHcOvnYYUY4u5bpDsuvyEQ/viewform" target="_blank" class="task-url">https://docs.google.com/forms/d/e/1FAIpQLSdaWE0f7DwZKoiGVRWT-OdP8rVvMHcOvnYYUY4u5bpDsuvyEQ/viewform</a>
+                            <td class="task-desc" data-label="Task Description">
+                                <div class="task-title">Revised Landing Page — Site 2</div>
+                                URL: <a class="task-url" href="https://sellingaccra.com/landing-page-2-selling-accra/" target="_blank" rel="noopener">https://sellingaccra.com/landing-page-2-selling-accra/</a>
+                                <ul class="task-list">
+                                    <li>
+                                        1. Layout &amp; Navigation
+                                        <ul class="task-list">
+                                            <li>Move Exterior View in the list/navigation to appear immediately before Aerial View.</li>
+                                            <li>Nudge the Exterior View image upward slightly.</li>
+                                            <li>In the right-panel navigation, rename Modern Kitchen to Kitchen only.</li>
+                                            <li>Remove the Bedroom Suite image and tab.</li>
+                                            <li>Add a Bedroom image and label/tab.</li>
+                                            <li>Fix the left-panel website images so they load correctly and reliably.</li>
+                                            <li>Restore the original glass-effect UX/UI styling on the side panel.</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        2. Branding &amp; Copy
+                                        <ul class="task-list">
+                                            <li>Replace the text “Selling Accra” with the Selling Accra PNG logo.</li>
+                                            <li>Display the name as Beatrix only — remove the full name.</li>
+                                            <li>Remove wording such as “gated real estate etc.” and similar phrasing from the copy.</li>
+                                            <li>Add descriptive copy for the listing property.</li>
+                                            <li>Reduce watermark visibility on photos — watermarks are still too prominent.</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        3. Property Details Formatting
+                                        <ul class="task-list">
+                                            <li>Present property details aesthetically as bullet points rather than a plain list.</li>
+                                            <li>
+                                                Use grouped bullet points, e.g.:
+                                                <span class="sub-bullet">o Deluxe…</span>
+                                                <span class="sub-bullet">o 4 bedrooms…</span>
+                                            </li>
+                                            <li>Style the bullet text in the caramel color to match the Contact tab.</li>
+                                            <li>Use a wraparound text layout, with each point retaining its own bullet.</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        4. Contact Details &amp; Contact Form
+                                        <ul class="task-list">
+                                            <li>Update the contact form’s contact details.</li>
+                                            <li>Use the email address help@SellingAccra.com.</li>
+                                            <li>Make the telephone number larger in size.</li>
+                                            <li>
+                                                Format the contact details as:
+                                                <span class="sub-bullet">o Contact: Beatrix — Your Trusted Realtor</span>
+                                                <span class="sub-bullet">o WhatsApp: [number]</span>
+                                                <span class="sub-bullet">o Email: help@SellingAccra.com</span>
+                                            </li>
+                                            <li>Remove the WhatsApp number and email address from the main page.</li>
+                                            <li>Place WhatsApp and email under Contact inside the contact form only.</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        5. “List With Me” Section
+                                        <ul class="task-list">
+                                            <li>Remove the “List With Me” block from the bottom of the landing page.</li>
+                                            <li>Create a separate “List With Me” page containing only that content — no other information.</li>
+                                        </ul>
+                                    </li>
+                                </ul>
                             </td>
-                            <td><span class="status-badge status-completed">Completed</span></td>
-                            <td class="text-right">3h</td>
-                            <td class="text-right">$7.00</td>
-                            <td class="text-right">$21.00</td>
-                        </tr>
-                        <tr>
-                            <td class="task-desc">4. Create new IG account</td>
-                            <td><span class="status-badge status-pending">Pending</span></td>
-                            <td class="text-right">0h</td>
-                            <td class="text-right">$7.00</td>
-                            <td class="text-right">$0.00</td>
-                        </tr>
-                        <tr>
-                            <td class="task-desc">5. Update LinkedIn profile</td>
-                            <td><span class="status-badge status-pending">Pending</span></td>
-                            <td class="text-right">0h</td>
-                            <td class="text-right">$7.00</td>
-                            <td class="text-right">$0.00</td>
-                        </tr>
-                        <tr>
-                            <td class="task-desc">6. Update Facebook Page (Profile &amp; Cover Image) https://www.facebook.com/sellingaccra</td>
-                            <td><span class="status-badge status-completed">Completed</span></td>
-                            <td class="text-right">2h</td>
-                            <td class="text-right">$7.00</td>
-                            <td class="text-right">$14.00</td>
-                        </tr>
-                        <tr>
-                            <td class="task-desc">7. Post, post, post</td>
-                            <td><span class="status-badge status-pending">Pending</span></td>
-                            <td class="text-right">0h</td>
-                            <td class="text-right">$7.00</td>
-                            <td class="text-right">$0.00</td>
+                            <td data-label="Status"><span class="status-badge status-completed">Completed</span></td>
+                            <td class="text-right tabular" data-label="Hours"><span data-count="20" data-suffix="h">20h</span></td>
+                            <td class="text-right tabular" data-label="Rate"><span data-count="7" data-prefix="$" data-decimals="2">$7.00</span></td>
+                            <td class="text-right tabular" data-label="Amount"><span data-count="140" data-prefix="$" data-decimals="2">$140.00</span></td>
                         </tr>
                     </tbody>
                 </table>
-            </div>
+            </section>
 
-            <!-- Totals Summary -->
-            <div class="summary-wrapper">
+            <!-- Summary Card -->
+            <section class="summary-wrapper" aria-label="Invoice summary">
                 <div class="summary-card">
-                    <div class="summary-row">
-                        <span>Subtotal (Completed Tasks):</span>
-                        <span>$133.00</span>
+                    <div class="summary-header">
+                        <h2 class="summary-title">Summary</h2>
+                        <span class="summary-status">Unpaid</span>
                     </div>
-                    <div class="summary-row">
-                        <span>Total Hours Logged:</span>
-                        <span>19 hrs</span>
+                    <div class="summary-rows">
+                        <div class="summary-row">
+                            <span>Subtotal (Completed Tasks)</span>
+                            <span>$140.00</span>
+                        </div>
+                        <div class="summary-divider"></div>
+                        <div class="summary-row">
+                            <span>Total Hours Logged</span>
+                            <span>20h</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Hourly Rate</span>
+                            <span>$7.00</span>
+                        </div>
                     </div>
-                    <div class="summary-row">
-                        <span>Hourly Rate:</span>
-                        <span>$7.00 / hr</span>
-                    </div>
-                    <div class="summary-row total">
-                        <span>Total Due:</span>
-                        <span>$133.00</span>
-                    </div>
-                    <div class="summary-row paid-row">
-                        <span>Payment Received (Nov 5, 2026):</span>
-                        <span>−$133.00</span>
-                    </div>
-                    <div class="summary-row balance">
-                        <span>Balance Due:</span>
-                        <span>$0.00</span>
+                    <div class="summary-balance">
+                        <span class="summary-balance-label">Total Due</span>
+                        <span class="summary-balance-value">$140.00</span>
                     </div>
                 </div>
-            </div>
+            </section>
 
-            <!-- Payment Received Section -->
-            <div class="payment-section">
-                <div class="payment-info">
-                    <h4>Payment Received — Thank You!</h4>
-                    <p>Paid in full via Wise (formerly TransferWise). This invoice is now settled.</p>
-                    <p class="payment-ref">Reference: WISE-2026-1105-SELACRA</p>
+            <!-- Payment Instructions -->
+            <section class="payment-instructions" aria-label="Payment Instructions">
+                <div class="payment-instructions-header">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                        <line x1="1" y1="10" x2="23" y2="10"></line>
+                    </svg>
+                    <h3>Payment Instructions</h3>
                 </div>
-                <span class="paid-chip">✓ Paid in Full</span>
-            </div>
+                <div class="payment-instructions-body">
+                    <p>Please remit payment via <strong>Wise</strong> (formerly TransferWise) by <strong>Nov 9, 2026</strong>. Contact Brian Gicaro for transfer details.</p>
+                    
+                    <div class="payment-grid">
+                        <div class="payment-item">
+                            <span class="payment-item-label">Wise Recipient</span>
+                            <span class="payment-item-value">BRIAN DALISAY GICARO<br><span style="color: var(--muted); font-size: 11.5px;">(@briandalisayg1)</span></span>
+                        </div>
+                        <div class="payment-item">
+                            <span class="payment-item-label">WhatsApp</span>
+                            <span class="payment-item-value"><a href="https://wa.me/639692133420" target="_blank" rel="noopener">+63 969 213 3420</a></span>
+                        </div>
+                        <div class="payment-item">
+                            <span class="payment-item-label">Reference</span>
+                            <span class="payment-item-value" style="font-weight: 600;">INV2026SELACRA-003</span>
+                        </div>
+                        <div class="payment-item">
+                            <span class="payment-item-label">Wise Payment Link</span>
+                            <span class="payment-item-value"><a href="https://wise.com/pay/me/briandalisayg1" target="_blank" rel="noopener">wise.com/pay/me/briandalisayg1</a></span>
+                        </div>
+                    </div>
 
-            <!-- Notes -->
-            <div class="notes">
-                <strong>Project Notes:</strong>
-                Overall website launch preparation is 57% complete (4 of 7 tasks). No items are currently flagged for revision. Pending items (IG Account, LinkedIn, Social Posting) will be billed upon completion in the next cycle.
-            </div>
+                    <a href="https://wise.com/pay/me/briandalisayg1" class="pay-now-btn" target="_blank" rel="noopener">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                        Pay with Wise
+                    </a>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="footer">
+                <p>Thank you for your business! If you have any questions regarding this invoice, please contact Brian Gicaro.</p>
+                <p><strong>Invoice #INV2026SELACRA-003</strong> — Generated on Nov 7, 2026</p>
+            </footer>
+
+            <button class="print-btn" onclick="window.print()">Print / Save Invoice</button>
         </div>
-    </div>
-
-    <!-- Print Button -->
-    <button class="print-btn" onclick="window.print()">Print / Save as PDF</button>
+    </main>
 
 </body>
 </html>
