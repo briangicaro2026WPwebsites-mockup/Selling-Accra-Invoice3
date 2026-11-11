@@ -609,25 +609,6 @@
             opacity: 0.5;
         }
 
-        .sub-bullet {
-            display: block;
-            position: relative;
-            padding-left: 18px;
-            margin-top: 2px;
-            color: var(--muted);
-            font-size: 11.5px;
-        }
-        .sub-bullet::before {
-            content: "";
-            position: absolute;
-            left: 6px;
-            top: 6px;
-            width: 4px;
-            height: 4px;
-            border: 1px solid var(--subtle);
-            border-radius: 50%;
-        }
-
         /* ============================================================
            Status Badges
            ============================================================ */
@@ -1059,15 +1040,15 @@
             <div class="meta-row">
                 <div class="meta-item">
                     <div class="meta-label">Issue Date</div>
-                    <div class="meta-value">Nov 7, 2026</div>
+                    <div class="meta-value">Nov 10, 2026</div>
                 </div>
                 <div class="meta-item">
                     <div class="meta-label">Due Date</div>
-                    <div class="meta-value">Nov 9, 2026</div>
+                    <div class="meta-value">Nov 14, 2026</div>
                 </div>
                 <div class="meta-item">
                     <div class="meta-label">Billing Period</div>
-                    <div class="meta-value">Nov 2 — Nov 7, 2026</div>
+                    <div class="meta-value">Nov 9 — Nov 14, 2026</div>
                 </div>
             </div>
 
@@ -1075,8 +1056,8 @@
             <section class="amount-card" aria-label="Amount due">
                 <div class="amount-main">
                     <div class="amount-label">Amount Due</div>
-                    <div class="amount-figure" data-count="140" data-prefix="$" data-decimals="2">$140.00</div>
-                    <div class="amount-due">Due by <strong>Nov 9, 2026</strong></div>
+                    <div class="amount-figure" data-count="35" data-prefix="$" data-decimals="2">$35.00</div>
+                    <div class="amount-due">Due by <strong>Nov 14, 2026</strong></div>
                 </div>
                 <div class="amount-note">
                     <div class="amount-note-title">Payment outstanding</div>
@@ -1134,73 +1115,47 @@
                     <tbody>
                         <tr>
                             <td class="task-desc" data-label="Task Description">
-                                <div class="task-title">Revised Landing Page — Site 2</div>
-                                URL: <a class="task-url" href="https://sellingaccra.com/landing-page-2-selling-accra/" target="_blank" rel="noopener">https://sellingaccra.com/landing-page-2-selling-accra/</a>
+                                <div class="task-title">Private Enquiry Form Development &amp; Integration</div>
+                                URL: <a class="task-url" href="https://sellingaccra.com/" target="_blank" rel="noopener">https://sellingaccra.com/</a>
                                 <ul class="task-list">
                                     <li>
-                                        1. Layout &amp; Navigation
+                                        1. Section Header &amp; Invitation Intro Copy
                                         <ul class="task-list">
-                                            <li>Move Exterior View in the list/navigation to appear immediately before Aerial View.</li>
-                                            <li>Nudge the Exterior View image upward slightly.</li>
-                                            <li>In the right-panel navigation, rename Modern Kitchen to Kitchen only.</li>
-                                            <li>Remove the Bedroom Suite image and tab.</li>
-                                            <li>Add a Bedroom image and label/tab.</li>
-                                            <li>Fix the left-panel website images so they load correctly and reliably.</li>
-                                            <li>Restore the original glass-effect UX/UI styling on the side panel.</li>
+                                            <li>Heading: "AN INVITATION TO ENQUIRE"</li>
+                                            <li>Descriptive text: "Some properties are truly exceptional. If you would like to discover more about this distinguished residence, request further information or arrange a private viewing, we invite you to get in touch. Your enquiry will be handled personally, with the utmost discretion and confidentiality. Kindly fill out the following details:"</li>
                                         </ul>
                                     </li>
                                     <li>
-                                        2. Branding &amp; Copy
+                                        2. Form Input Fields &amp; Email Integration
                                         <ul class="task-list">
-                                            <li>Replace the text “Selling Accra” with the Selling Accra PNG logo.</li>
-                                            <li>Display the name as Beatrix only — remove the full name.</li>
-                                            <li>Remove wording such as “gated real estate etc.” and similar phrasing from the copy.</li>
-                                            <li>Add descriptive copy for the listing property.</li>
-                                            <li>Reduce watermark visibility on photos — watermarks are still too prominent.</li>
+                                            <li>Full name (Text input)</li>
+                                            <li>Email address (Email input)</li>
+                                            <li>WhatsApp telephone number (Phone input)</li>
+                                            <li>Country of residence (Text input / selector)</li>
+                                            <li>Nature of enquiry dropdown options: Request further information, Arrange a private viewing, Private discussion</li>
+                                            <li><strong>FormSubmit.co Setup:</strong> Configured to send form submissions directly to help@sellingaccra.com without needing a complex backend server or plugins, handling email delivery straight from the HTML.</li>
                                         </ul>
                                     </li>
                                     <li>
-                                        3. Property Details Formatting
+                                        3. Submit Button &amp; Styling
                                         <ul class="task-list">
-                                            <li>Present property details aesthetically as bullet points rather than a plain list.</li>
-                                            <li>
-                                                Use grouped bullet points, e.g.:
-                                                <span class="sub-bullet">o Deluxe…</span>
-                                                <span class="sub-bullet">o 4 bedrooms…</span>
-                                            </li>
-                                            <li>Style the bullet text in the caramel color to match the Contact tab.</li>
-                                            <li>Use a wraparound text layout, with each point retaining its own bullet.</li>
+                                            <li>Custom button label: "SUBMIT PRIVATE ENQUIRY"</li>
+                                            <li>Sub-label text: "Understated, elegant and purposeful."</li>
                                         </ul>
                                     </li>
                                     <li>
-                                        4. Contact Details &amp; Contact Form
+                                        4. Confirmation State / Success Message
                                         <ul class="task-list">
-                                            <li>Update the contact form’s contact details.</li>
-                                            <li>Use the email address help@SellingAccra.com.</li>
-                                            <li>Make the telephone number larger in size.</li>
-                                            <li>
-                                                Format the contact details as:
-                                                <span class="sub-bullet">o Contact: Beatrix — Your Trusted Realtor</span>
-                                                <span class="sub-bullet">o WhatsApp: [number]</span>
-                                                <span class="sub-bullet">o Email: help@SellingAccra.com</span>
-                                            </li>
-                                            <li>Remove the WhatsApp number and email address from the main page.</li>
-                                            <li>Place WhatsApp and email under Contact inside the contact form only.</li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        5. “List With Me” Section
-                                        <ul class="task-list">
-                                            <li>Remove the “List With Me” block from the bottom of the landing page.</li>
-                                            <li>Create a separate “List With Me” page containing only that content — no other information.</li>
+                                            <li>Success title: "THANK YOU FOR YOUR ENQUIRY"</li>
+                                            <li>Confirmation copy: "Your details have been received. We appreciate your interest in this exceptional property. A member of our team will be in contact with you personally."</li>
                                         </ul>
                                     </li>
                                 </ul>
                             </td>
                             <td data-label="Status"><span class="status-badge status-completed">Completed</span></td>
-                            <td class="text-right tabular" data-label="Hours"><span data-count="20" data-suffix="h">20h</span></td>
+                            <td class="text-right tabular" data-label="Hours"><span data-count="5" data-suffix="h">5h</span></td>
                             <td class="text-right tabular" data-label="Rate"><span data-count="7" data-prefix="$" data-decimals="2">$7.00</span></td>
-                            <td class="text-right tabular" data-label="Amount"><span data-count="140" data-prefix="$" data-decimals="2">$140.00</span></td>
+                            <td class="text-right tabular" data-label="Amount"><span data-count="35" data-prefix="$" data-decimals="2">$35.00</span></td>
                         </tr>
                     </tbody>
                 </table>
@@ -1216,12 +1171,12 @@
                     <div class="summary-rows">
                         <div class="summary-row">
                             <span>Subtotal (Completed Tasks)</span>
-                            <span>$140.00</span>
+                            <span>$35.00</span>
                         </div>
                         <div class="summary-divider"></div>
                         <div class="summary-row">
                             <span>Total Hours Logged</span>
-                            <span>20h</span>
+                            <span>5h</span>
                         </div>
                         <div class="summary-row">
                             <span>Hourly Rate</span>
@@ -1230,7 +1185,7 @@
                     </div>
                     <div class="summary-balance">
                         <span class="summary-balance-label">Total Due</span>
-                        <span class="summary-balance-value">$140.00</span>
+                        <span class="summary-balance-value">$35.00</span>
                     </div>
                 </div>
             </section>
@@ -1245,7 +1200,7 @@
                     <h3>Payment Instructions</h3>
                 </div>
                 <div class="payment-instructions-body">
-                    <p>Please remit payment via <strong>Wise</strong> (formerly TransferWise) by <strong>Nov 9, 2026</strong>. Contact Brian Gicaro for transfer details.</p>
+                    <p>Please remit payment via <strong>Wise</strong> (formerly TransferWise) by <strong>Nov 14, 2026</strong>. Contact Brian Gicaro for transfer details.</p>
                     
                     <div class="payment-grid">
                         <div class="payment-item">
@@ -1279,7 +1234,7 @@
             <!-- Footer -->
             <footer class="footer">
                 <p>Thank you for your business! If you have any questions regarding this invoice, please contact Brian Gicaro.</p>
-                <p><strong>Invoice #INV2026SELACRA-003</strong> — Generated on Nov 7, 2026</p>
+                <p><strong>Invoice #INV2026SELACRA-003</strong> — Generated on Nov 10, 2026</p>
             </footer>
 
             <button class="print-btn" onclick="window.print()">Print / Save Invoice</button>
